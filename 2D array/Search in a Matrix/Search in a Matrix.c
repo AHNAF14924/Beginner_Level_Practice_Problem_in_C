@@ -3,42 +3,35 @@
 #define ROWS 3
 #define COLS 3
 
-int searchMatrix(int matrix[ROWS][COLS], int target)
+void searchArray(int matrix[ROWS][COLS], int target)
 {
-    int row = 0, col = COLS - 1;
+    int found = 0;
 
-    while (row < ROWS && col >= 0)
+    printf("Searching for %d:\n", target);
+    for (int i = 0; i < ROWS; i++)
     {
-        if (matrix[row][col] == target)
+        for (int j = 0; j < COLS; j++)
         {
-            return 1;
-        }
-        else if (matrix[row][col] < target)
-        {
-            row++;
-        }
-        else
-        {
-            col--;
+            if (matrix[i][j] == target)
+            {
+                printf("%d is found in %dth row %dth column.\n", target, i + 1, j + 1);
+                found = 1;
+            }
         }
     }
 
-    return 0;
+    if (!found)
+    {
+        printf("%d is not found in the matrix.\n", target);
+    }
 }
 
 int main()
 {
-    int matrix[ROWS][COLS] = {{1, 4, 7}, {2, 5, 8}, {3, 6, 9}};
-    int target = 5;
+    int matrix[ROWS][COLS] = {{1, 3, 7}, {2, 5, 3}, {3, 6, 9}};
+    int target = 3;
 
-    if (searchMatrix(matrix, target))
-    {
-        printf("Element %d found in the matrix.\n", target);
-    }
-    else
-    {
-        printf("Element %d not found in the matrix.\n", target);
-    }
+    searchArray(matrix, target);
 
     return 0;
 }
